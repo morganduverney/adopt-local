@@ -15,6 +15,10 @@
 		D7F3F3762666C0ED00FFC8BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7F3F3742666C0ED00FFC8BB /* LaunchScreen.storyboard */; };
 		D7F3F3812666C0ED00FFC8BB /* AdoptLocalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3F3802666C0ED00FFC8BB /* AdoptLocalTests.swift */; };
 		D7F3F38C2666C0ED00FFC8BB /* AdoptLocalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3F38B2666C0ED00FFC8BB /* AdoptLocalUITests.swift */; };
+		D7F3F39A2666C19A00FFC8BB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3F3992666C19A00FFC8BB /* API.swift */; };
+		D7F3F39C2666C29500FFC8BB /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3F39B2666C29500FFC8BB /* AccessToken.swift */; };
+		D7F3F39E2666C3F800FFC8BB /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3F39D2666C3F800FFC8BB /* Animal.swift */; };
+		D7F3F3A02666CB1900FFC8BB /* AnimalCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3F39F2666CB1900FFC8BB /* AnimalCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,11 @@
 		D7F3F3872666C0ED00FFC8BB /* AdoptLocalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdoptLocalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7F3F38B2666C0ED00FFC8BB /* AdoptLocalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptLocalUITests.swift; sourceTree = "<group>"; };
 		D7F3F38D2666C0ED00FFC8BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7F3F3992666C19A00FFC8BB /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		D7F3F39B2666C29500FFC8BB /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		D7F3F39D2666C3F800FFC8BB /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
+		D7F3F39F2666CB1900FFC8BB /* AnimalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalCollection.swift; sourceTree = "<group>"; };
+		D7F3F3A12666D25100FFC8BB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +88,7 @@
 		D7F3F35D2666C0EB00FFC8BB = {
 			isa = PBXGroup;
 			children = (
+				D7F3F3A12666D25100FFC8BB /* Config.xcconfig */,
 				D7F3F3682666C0EB00FFC8BB /* AdoptLocal */,
 				D7F3F37F2666C0ED00FFC8BB /* AdoptLocalTests */,
 				D7F3F38A2666C0ED00FFC8BB /* AdoptLocalUITests */,
@@ -106,6 +116,10 @@
 				D7F3F3722666C0ED00FFC8BB /* Assets.xcassets */,
 				D7F3F3742666C0ED00FFC8BB /* LaunchScreen.storyboard */,
 				D7F3F3772666C0ED00FFC8BB /* Info.plist */,
+				D7F3F3992666C19A00FFC8BB /* API.swift */,
+				D7F3F39B2666C29500FFC8BB /* AccessToken.swift */,
+				D7F3F39D2666C3F800FFC8BB /* Animal.swift */,
+				D7F3F39F2666CB1900FFC8BB /* AnimalCollection.swift */,
 			);
 			path = AdoptLocal;
 			sourceTree = "<group>";
@@ -260,7 +274,11 @@
 			files = (
 				D7F3F36E2666C0EB00FFC8BB /* ViewController.swift in Sources */,
 				D7F3F36A2666C0EB00FFC8BB /* AppDelegate.swift in Sources */,
+				D7F3F39A2666C19A00FFC8BB /* API.swift in Sources */,
 				D7F3F36C2666C0EB00FFC8BB /* SceneDelegate.swift in Sources */,
+				D7F3F39C2666C29500FFC8BB /* AccessToken.swift in Sources */,
+				D7F3F39E2666C3F800FFC8BB /* Animal.swift in Sources */,
+				D7F3F3A02666CB1900FFC8BB /* AnimalCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +335,7 @@
 /* Begin XCBuildConfiguration section */
 		D7F3F38E2666C0ED00FFC8BB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7F3F3A12666D25100FFC8BB /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -378,6 +397,7 @@
 		};
 		D7F3F38F2666C0ED00FFC8BB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7F3F3A12666D25100FFC8BB /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
