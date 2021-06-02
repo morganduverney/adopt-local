@@ -7,8 +7,12 @@
 
 import Foundation
 
-enum API {
-    static func getAnimals(with accessToken: AccessToken, completionHandler: @escaping (AnimalCollection) -> ()) {
+class API {
+    static let shared = API()
+    
+    var accessToken: AccessToken?
+    
+    func getAnimals(with accessToken: AccessToken, completionHandler: @escaping (AnimalCollection) -> ()) {
         guard let url = URL(string: "https://api.petfinder.com/v2/animals?type=dog&page=2") else {
             print("URL is invalid")
             return
@@ -35,7 +39,7 @@ enum API {
         .resume()
     }
 
-    static func getAccessToken(completionHandler: @escaping (AccessToken) -> ()) {
+    func getAccessToken(completionHandler: @escaping (AccessToken) -> ()) {
         guard let url = URL(string: "https://api.petfinder.com/v2/oauth2/token"),
               let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String,
               let apiSecret = Bundle.main.infoDictionary?["API_SECRET"] as? String else {
