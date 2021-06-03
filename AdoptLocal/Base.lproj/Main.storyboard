@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -62,19 +63,98 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bas-Ia-aj5">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewLayout key="collectionViewLayout" id="Z4a-7d-OQN"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AnimalCell" id="RSI-oI-vEu" customClass="AnimalCell" customModule="AdoptLocal" customModuleProvider="target">
+                                        <rect key="frame" x="0.5" y="0.0" width="413" height="170"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uHB-nx-SLN">
+                                            <rect key="frame" x="0.0" y="0.0" width="413" height="170"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OSC-xh-lgK">
+                                                    <rect key="frame" x="166" y="13" width="239" height="144"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1z-2K-qUb">
+                                                            <rect key="frame" x="0.0" y="0.0" width="239" height="14.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bayley" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dq-uD-O6r">
+                                                            <rect key="frame" x="0.0" y="22.5" width="239" height="17"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Female - Young" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1t-bz-bSS">
+                                                            <rect key="frame" x="0.0" y="47.5" width="239" height="14.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfY-dX-TE6">
+                                                            <rect key="frame" x="0.0" y="70" width="239" height="74"/>
+                                                            <string key="text">Bayley is a sweet girl with lots of energy. She is good with cats, great with kids, and she prefers to be the one in charge with other dogs.</string>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HBu-2X-efc">
+                                                    <rect key="frame" x="8" y="9" width="150" height="151.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="9oC-Mq-3cO"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="OSC-xh-lgK" firstAttribute="leading" secondItem="HBu-2X-efc" secondAttribute="trailing" constant="8" id="I06-Il-qSO"/>
+                                                <constraint firstItem="HBu-2X-efc" firstAttribute="leading" secondItem="uHB-nx-SLN" secondAttribute="leadingMargin" id="RWg-F0-nNN"/>
+                                                <constraint firstItem="HBu-2X-efc" firstAttribute="top" secondItem="uHB-nx-SLN" secondAttribute="top" constant="8" id="WYh-RY-apK"/>
+                                                <constraint firstAttribute="trailing" secondItem="OSC-xh-lgK" secondAttribute="trailing" constant="8" id="YVz-a9-AbF"/>
+                                                <constraint firstItem="OSC-xh-lgK" firstAttribute="centerY" secondItem="HBu-2X-efc" secondAttribute="centerY" id="aPE-16-b9D"/>
+                                                <constraint firstItem="HBu-2X-efc" firstAttribute="centerY" secondItem="uHB-nx-SLN" secondAttribute="centerY" id="g95-Bd-shS"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="413" height="170"/>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="dfY-dX-TE6" id="ZDf-gc-dVM"/>
+                                            <outlet property="genderAgeLabel" destination="h1t-bz-bSS" id="0eO-hx-DaH"/>
+                                            <outlet property="imageView" destination="HBu-2X-efc" id="Aoj-8j-Pow"/>
+                                            <outlet property="nameLabel" destination="1dq-uD-O6r" id="fba-ft-xuZ"/>
+                                            <outlet property="typeLabel" destination="W1z-2K-qUb" id="6du-ue-OLl"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bas-Ia-aj5" secondAttribute="trailing" id="0Q8-bs-u03"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bas-Ia-aj5" secondAttribute="bottom" id="3aT-pm-6ft"/>
+                            <constraint firstItem="bas-Ia-aj5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UME-u3-rXA"/>
+                            <constraint firstItem="bas-Ia-aj5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="q8r-qJ-M8Y"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lJj-jN-bRk"/>
+                    <connections>
+                        <outlet property="collectionView" destination="bas-Ia-aj5" id="mge-uR-adf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1735" y="53"/>
+            <point key="canvasLocation" x="1734.7826086956522" y="52.901785714285715"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZJM-7q-fyf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TVV-7M-5Wn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u47-MY-90q" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vJI-UU-NqK">
@@ -86,11 +166,13 @@
                         <segue destination="3mz-3k-sBM" kind="relationship" relationship="rootViewController" id="eqi-WJ-AtS"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TVV-7M-5Wn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="66.666666666666671" y="52.901785714285715"/>
         </scene>
     </scenes>
     <resources>
+        <image name="square" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

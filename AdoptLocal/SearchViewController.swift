@@ -21,6 +21,10 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         searchTextField.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        searchTextField.becomeFirstResponder()
+    }
 }
 
 extension SearchViewController: UITextFieldDelegate {

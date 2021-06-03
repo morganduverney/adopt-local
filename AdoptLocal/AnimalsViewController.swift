@@ -8,36 +8,37 @@
 import UIKit
 
 class AnimalsViewController: UIViewController {
-
+    
     enum Section {
         case main
     }
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     var searchQuery: String
-    var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Animal>!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
+        configureCollectionView()
         displayAnimals()
     }
     
     init?(coder: NSCoder, searchQuery: String) {
-      self.searchQuery = searchQuery
-      super.init(coder: coder)
+        self.searchQuery = searchQuery
+        super.init(coder: coder)
     }
-
+    
     required init?(coder: NSCoder) {
-      fatalError()
+        fatalError()
     }
 }
 
 extension AnimalsViewController {
     func createLayout() -> UICollectionViewLayout {
-        let estimatedHeight = CGFloat(100)
+        let estimatedHeight = CGFloat(170)
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(estimatedHeight))
+                                                heightDimension: .estimated(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: layoutSize)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize,
                                                        subitem: item,
@@ -49,32 +50,21 @@ extension AnimalsViewController {
         return layout
     }
     
-    func configureView() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemBackground
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+    func configureCollectionView() {
+        collectionView.collectionViewLayout = createLayout()
+        collectionView.register(AnimalCell.self, forCellWithReuseIdentifier: AnimalCell.reuseIdentifer)
     }
-
+    
+    
     func configureDataSource(with animals: [Animal]) {
-        let cellRegistration = UICollectionView.CellRegistration<AnimalCell, Animal> {
-            (cell, indexPath, animal) in
+        dataSource = UICollectionViewDiffableDataSource<Section,Animal>(collectionView: collectionView) {
+            (collectionView, indexPath, animal) -> AnimalCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnimalCell.reuseIdentifer, for: indexPath) as? AnimalCell else { fatalError("Could not create new cell") }
             cell.typeLabel.text = animal.type
             cell.nameLabel.text = animal.name
-            cell.ageGenderLabel.text = "\(animal.gender) - \(animal.age)"
+            cell.genderAgeLabel.text = "\(animal.gender) - \(animal.age)"
             cell.descriptionLabel.text = animal.description
-            cell.animalsSeparator = indexPath.item != animals.count - 1
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource<Section,Animal>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, item: Animal) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+            return cell
             
         }
         
@@ -151,15 +141,15 @@ extension AnimalsViewController {
 
 class LoadingViewController: UIViewController {
     var loadingIndicator = UIActivityIndicatorView(style: .large)
-
+    
     override func loadView() {
         view = UIView()
         view.backgroundColor = UIColor(white: 0, alpha: 0.1)
-
+        
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         loadingIndicator.startAnimating()
         view.addSubview(loadingIndicator)
-
+        
         loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
