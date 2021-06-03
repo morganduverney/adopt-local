@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7576EAF26683102002779D3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7576EAE26683102002779D3 /* SearchViewController.swift */; };
 		D7F3F36A2666C0EB00FFC8BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3F3692666C0EB00FFC8BB /* AppDelegate.swift */; };
 		D7F3F36C2666C0EB00FFC8BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3F36B2666C0EB00FFC8BB /* SceneDelegate.swift */; };
 		D7F3F36E2666C0EB00FFC8BB /* AnimalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3F36D2666C0EB00FFC8BB /* AnimalsViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D7576EAE26683102002779D3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D7F3F3662666C0EB00FFC8BB /* AdoptLocal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdoptLocal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7F3F3692666C0EB00FFC8BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7F3F36B2666C0EB00FFC8BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				D7F3F39B2666C29500FFC8BB /* AccessToken.swift */,
 				D7F3F39D2666C3F800FFC8BB /* Animal.swift */,
 				D7F3F3A42667D90800FFC8BB /* AnimalCell.swift */,
+				D7576EAE26683102002779D3 /* SearchViewController.swift */,
 			);
 			path = AdoptLocal;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				D7F3F36E2666C0EB00FFC8BB /* AnimalsViewController.swift in Sources */,
 				D7F3F36A2666C0EB00FFC8BB /* AppDelegate.swift in Sources */,
 				D7F3F39A2666C19A00FFC8BB /* API.swift in Sources */,
+				D7576EAF26683102002779D3 /* SearchViewController.swift in Sources */,
 				D7F3F36C2666C0EB00FFC8BB /* SceneDelegate.swift in Sources */,
 				D7F3F39C2666C29500FFC8BB /* AccessToken.swift in Sources */,
 				D7F3F39E2666C3F800FFC8BB /* Animal.swift in Sources */,

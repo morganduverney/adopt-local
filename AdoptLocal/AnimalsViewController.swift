@@ -12,35 +12,44 @@ class AnimalsViewController: UIViewController {
     enum Section {
         case main
     }
-
+    
+    var searchQuery: String
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Animal>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Animals"
-        configureHierarchy()
-        if let accessToken = API.shared.accessToken {
-            API.shared.getAnimals(with: accessToken) { [weak self] animalCollection in
-                DispatchQueue.main.async {
-                    self?.configureDataSource(with: animalCollection.animals)
-                }
-            }
-        } else {
-            API.shared.getAccessToken { [weak self] accessToken in
-                API.shared.accessToken = accessToken
-                API.shared.getAnimals(with: accessToken) { animalCollection in
-                    DispatchQueue.main.async {
-                        self?.configureDataSource(with: animalCollection.animals)
-                    }
-                }
-            }
-        }
+        configureView()
+        displayAnimals()
+    }
+    
+    init?(coder: NSCoder, searchQuery: String) {
+      self.searchQuery = searchQuery
+      super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+      fatalError()
     }
 }
 
 extension AnimalsViewController {
-    func configureHierarchy() {
+    func createLayout() -> UICollectionViewLayout {
+        let estimatedHeight = CGFloat(100)
+        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(estimatedHeight))
+        let item = NSCollectionLayoutItem(layoutSize: layoutSize)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize,
+                                                       subitem: item,
+                                                       count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        section.interGroupSpacing = 10
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    func configureView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
@@ -75,19 +84,84 @@ extension AnimalsViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    func createLayout() -> UICollectionViewLayout {
-        let estimatedHeight = CGFloat(100)
-        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(estimatedHeight))
-        let item = NSCollectionLayoutItem(layoutSize: layoutSize)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize,
-                                                       subitem: item,
-                                                       count: 1)
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        section.interGroupSpacing = 10
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+    func displayAnimals() {
+        let loadingView = LoadingViewController()
+        if let accessToken = API.shared.accessToken,
+           accessToken.isValid() {
+            displayLoadingIndicator(loadingView: loadingView)
+            API.shared.getAnimals(with: accessToken, searchQuery: searchQuery) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let animalCollection):
+                        self?.configureDataSource(with: animalCollection.animals)
+                        self?.hideLoadingIndicator(loadingView: loadingView)
+                    case .failure:
+                        self?.hideLoadingIndicator(loadingView: loadingView)
+                        self?.displayError()
+                    }
+                }
+            }
+        } else {
+            displayLoadingIndicator(loadingView: loadingView)
+            API.shared.getAccessToken { [weak self] accessToken in
+                API.shared.accessToken = accessToken
+                let searchQuery = self?.searchQuery ?? ""
+                API.shared.getAnimals(with: accessToken, searchQuery: searchQuery) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let animalCollection):
+                            self?.configureDataSource(with: animalCollection.animals)
+                            self?.hideLoadingIndicator(loadingView: loadingView)
+                        case .failure:
+                            self?.hideLoadingIndicator(loadingView: loadingView)
+                            self?.displayError()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func displayLoadingIndicator(loadingView: LoadingViewController) {
+        addChild(loadingView)
+        loadingView.view.frame = view.frame
+        view.addSubview(loadingView.view)
+        loadingView.didMove(toParent: self)
+    }
+    
+    func hideLoadingIndicator(loadingView: LoadingViewController) {
+        loadingView.willMove(toParent: nil)
+        loadingView.view.removeFromSuperview()
+        loadingView.removeFromParent()
+    }
+    
+    func displayError() {
+        let errorLabel = UILabel()
+        view.addSubview(errorLabel)
+        
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.text = "No results found for your search, please try again."
+        errorLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        errorLabel.textAlignment = .center
+        
+        errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        errorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+}
+
+class LoadingViewController: UIViewController {
+    var loadingIndicator = UIActivityIndicatorView(style: .large)
+
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = UIColor(white: 0, alpha: 0.1)
+
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicator.startAnimating()
+        view.addSubview(loadingIndicator)
+
+        loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
 

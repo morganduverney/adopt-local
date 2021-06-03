@@ -11,30 +11,35 @@ class API {
     static let shared = API()
     
     var accessToken: AccessToken?
+    let animalsUrlBaseString: String = "https://api.petfinder.com/v2/animals?location="
     
-    func getAnimals(with accessToken: AccessToken, completionHandler: @escaping (AnimalCollection) -> ()) {
-        guard let url = URL(string: "https://api.petfinder.com/v2/animals?type=dog&page=2") else {
-            print("URL is invalid")
+    enum Errors: Error {
+        case errorOccurred
+        case unexpectedResponse
+        case decodeFailure
+    }
+    
+    func getAnimals(with accessToken: AccessToken, searchQuery: String, completionHandler: @escaping (Result<AnimalCollection, Errors>) -> ()) {
+        guard let urlString = "\(animalsUrlBaseString)\(searchQuery)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string:  urlString) else {
             return
         }
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData)
         request.setValue("Bearer \(accessToken.token)", forHTTPHeaderField: "Authorization")
+        
         URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-            if let error = error {
-                print("Error occurred while getting animals: \(error)")
-                return
+            guard error == nil else {
+                return completionHandler(.failure(Errors.errorOccurred))
             }
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                print("Unexpected response")
-                return
+                return completionHandler(.failure(Errors.unexpectedResponse))
             }
             guard let data = data,
                   let animalCollection = try? JSONDecoder().decode(AnimalCollection.self, from: data) else {
-                print("Failed to decode animal data")
-                return
+                return completionHandler(.failure(Errors.decodeFailure))
             }
-            completionHandler(animalCollection)
+            return completionHandler(.success(animalCollection))
         })
         .resume()
     }

@@ -9,6 +9,10 @@ import Foundation
 
 struct AnimalCollection: Decodable {
     let animals: [Animal]
+    
+    enum Error {
+        case failure
+    }
 }
 
 struct Animal: Decodable, Hashable {
