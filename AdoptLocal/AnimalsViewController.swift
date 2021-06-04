@@ -36,23 +36,20 @@ class AnimalsViewController: UIViewController {
 
 extension AnimalsViewController {
     func createLayout() -> UICollectionViewLayout {
-        let estimatedHeight = CGFloat(170)
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .estimated(estimatedHeight))
+                                                heightDimension: .estimated(CGFloat(120)))
         let item = NSCollectionLayoutItem(layoutSize: layoutSize)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize,
                                                        subitem: item,
                                                        count: 1)
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        section.interGroupSpacing = 10
+        section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
     
     func configureCollectionView() {
         collectionView.collectionViewLayout = createLayout()
-        collectionView.register(AnimalCell.self, forCellWithReuseIdentifier: AnimalCell.reuseIdentifer)
     }
     
     
@@ -63,7 +60,6 @@ extension AnimalsViewController {
             cell.typeLabel.text = animal.type
             cell.nameLabel.text = animal.name
             cell.genderAgeLabel.text = "\(animal.gender) - \(animal.age)"
-            cell.descriptionLabel.text = animal.description
             return cell
             
         }

@@ -14,6 +14,4 @@ class AnimalCell: UICollectionViewCell {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var genderAgeLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-
 }
